@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>February 14</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #FAF7F2;
+            --warm-black: #1a1a18;
+            --warm-gray: #6b6860;
+            --soft-gold: #c4a670;
+            --soft-gold-light: #d4bc8e;
+            --blush: #e8d5c4;
+            --section-gap: 6rem;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--warm-black);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--warm-black);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            color: var(--warm-gray);
+            margin-bottom: 3rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--soft-gold);
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            animation: fadeInUp 1.5s ease-out 1s both;
+        }
+
+        .scroll-hint svg {
+            width: 20px;
+            height: 20px;
+            animation: bobDown 2s ease-in-out infinite;
+        }
+
+        @keyframes bobDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Divider ── */
+        .divider {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--soft-gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* ── Sections ── */
+        .section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: var(--section-gap) 2rem;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+        }
+
+        .section p {
+            color: var(--warm-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ── Meeting Card ── */
+        .meeting-card {
+            background: #fff;
+            border: 1px solid #e8e4dd;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .meeting-card .mc-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.8rem 0;
+        }
+
+        .meeting-card .mc-row + .mc-row {
+            border-top: 1px solid #f0ece6;
+        }
+
+        .mc-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--cream);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .mc-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .mc-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--warm-black);
+        }
+
+        .mc-value a {
+            color: var(--warm-black);
+            text-decoration: underline;
+            text-decoration-color: var(--soft-gold-light);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .mc-value a:hover {
+            text-decoration-color: var(--soft-gold);
+        }
+
+        /* ── Packing List ── */
+        .pack-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .pack-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #eee8e0;
+            font-size: 0.95rem;
+            color: var(--warm-gray);
+        }
+
+        .pack-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pack-list .li-icon {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--soft-gold-light), var(--blush));
+        }
+
+        .tl-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .tl-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 8px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            border: 2px solid var(--soft-gold-light);
+            background: var(--cream);
+            transform: translateX(0px);
+        }
+
+        .tl-time {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .tl-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--warm-black);
+            margin-bottom: 0.15rem;
+        }
+
+        .tl-desc {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+        }
+
+        /* ── Footer ── */
+        .footer-note {
+            text-align: center;
+            padding: 4rem 2rem 6rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--warm-gray);
+        }
+
+        .footer-heart {
+            display: block;
+            margin-top: 1rem;
+            color: var(--soft-gold);
+            font-style: normal;
+            font-size: 1.5rem;
+        }
+
+        /* ── Animations ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            :root {
+                --section-gap: 4rem;
+            }
+
+            .meeting-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <p class="hero-date">Friday, February 14 &middot; 2025</p>
+        <h1 class="hero-name">Natalie</h1>
+        <p class="hero-subtitle">You're invited to an evening<br>you don't need to plan.</p>
+        <div class="scroll-hint">
+            <span>Keep reading</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Where & When -->
+    <section class="section reveal">
+        <p class="section-label">Where &amp; When</p>
+        <h2 class="section-heading">Meet me here</h2>
+        <p>All you need to do is show up. I'll take care of the rest.</p>
+
+        <div class="meeting-card">
+            <div class="mc-row">
+                <div class="mc-icon">&#128205;</div>
+                <div>
+                    <div class="mc-label">Location</div>
+                    <div class="mc-value">
+                        <a href="https://maps.app.goo.gl/XASwgE9U785xPTDAA" target="_blank" rel="noopener">
+                            Open in Maps &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mc-row">
+                <div class="mc-icon">&#128336;</div>
+                <div>
+                    <div class="mc-label">Time</div>
+                    <div class="mc-value">Friday, 19:30 &ndash; 19:45</div>
+                </div>
+            </div>
+            <div class="mc-row">
+                <div class="mc-icon">&#127860;</div>
+                <div>
+                    <div class="mc-label">Dinner</div>
+                    <div class="mc-value">20:00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- What to Pack -->
+    <section class="section reveal">
+        <p class="section-label">What to Pack</p>
+        <h2 class="section-heading">Just a small bag</h2>
+        <p>We're staying one night. Pack light, look great.</p>
+
+        <ul class="pack-list">
+            <li>
+                <span class="li-icon">&#10024;</span>
+                <span>An elegant outfit for dinner</span>
+            </li>
+            <li>
+                <span class="li-icon">&#127946;</span>
+                <span>Swimsuit</span>
+            </li>
+            <li>
+                <span class="li-icon">&#127769;</span>
+                <span>One-night essentials</span>
+            </li>
+        </ul>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- The Plan -->
+    <section class="section reveal">
+        <p class="section-label">The Weekend</p>
+        <h2 class="section-heading">Here's a glimpse</h2>
+        <p>No decisions required. Just enjoy.</p>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Friday Evening</div>
+                <div class="tl-title">Dinner</div>
+                <div class="tl-desc">A proper sit-down with good food and better company.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">Saturday Morning</div>
+                <div class="tl-title">Sleep In</div>
+                <div class="tl-desc">No alarms. Wake up whenever.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">Saturday 12:15</div>
+                <div class="tl-title">Couple Massage</div>
+                <div class="tl-desc">Already booked.</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">At your pace</div>
+                <div class="tl-title">Pool &amp; Sauna</div>
+                <div class="tl-desc">Spa, swim, relax &mdash; no schedule.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <div class="footer-note reveal">
+        See you Friday, Natalie.
+        <span class="footer-heart">&hearts;</span>
+    </div>
+
+    <script>
+        // Intersection Observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

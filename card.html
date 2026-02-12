@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #FAF7F2;
+            --warm-black: #1a1a18;
+            --warm-gray: #6b6860;
+            --soft-gold: #c4a670;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8e4dd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .instructions {
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--warm-gray);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .instructions strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--warm-black);
+        }
+
+        .instructions code {
+            background: rgba(0,0,0,0.06);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* ── Card ── */
+        .card {
+            width: 400px;
+            background: var(--cream);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-inner {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-date {
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--warm-black);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--warm-gray);
+            margin-bottom: 2.5rem;
+        }
+
+        .card-line {
+            width: 40px;
+            height: 1px;
+            background: var(--soft-gold);
+            margin-bottom: 2.5rem;
+        }
+
+        .qr-container {
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 12px;
+        }
+
+        .qr-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .card-scan-text {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .card-heart {
+            color: var(--soft-gold);
+            font-size: 1.3rem;
+        }
+
+        /* ── URL Input ── */
+        .url-input-area {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .url-input-area input {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            padding: 0.6rem 1rem;
+            border: 1px solid #d0ccc4;
+            border-radius: 8px;
+            background: #fff;
+            width: 340px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .url-input-area input:focus {
+            border-color: var(--soft-gold);
+        }
+
+        .url-input-area button {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.65rem 1.2rem;
+            background: var(--warm-black);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .url-input-area button:hover {
+            background: #333;
+        }
+
+        .print-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.65rem 2rem;
+            background: var(--soft-gold);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #b89a5c;
+        }
+
+        /* ── Print styles ── */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .instructions,
+            .url-input-area,
+            .print-btn {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #eee;
+                width: 90mm;
+                border-radius: 8px;
+                page-break-inside: avoid;
+            }
+
+            .card-inner {
+                padding: 2rem 1.5rem;
+            }
+
+            .card-name {
+                font-size: 2rem;
+            }
+
+            .qr-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instructions">
+        <strong>Printable Card Generator</strong>
+        Paste your website URL below, then click Print. The card will print at roughly credit-card size.<br>
+        Tip: use <code>Cmd + P</code> and select "Save as PDF" or print directly.
+    </div>
+
+    <div class="url-input-area">
+        <input type="url" id="urlInput" placeholder="https://yourusername.github.io/sv-invitation/" />
+        <button onclick="generateQR()">Generate QR</button>
+    </div>
+
+    <div class="card" id="card">
+        <div class="card-inner">
+            <p class="card-date">February 14, 2025</p>
+            <h1 class="card-name">Natalie</h1>
+            <p class="card-subtitle">Scan for your surprise</p>
+            <div class="card-line"></div>
+            <div class="qr-container" id="qrContainer">
+                <canvas id="qrCanvas"></canvas>
+            </div>
+            <p class="card-scan-text">Scan me</p>
+            <span class="card-heart">&hearts;</span>
+        </div>
+    </div>
+
+    <br>
+    <button class="print-btn" onclick="window.print()">Print Card</button>
+
+    <!-- QR Code library (lightweight, no dependencies) -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+    <script>
+        function generateQR() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                alert('Please enter the website URL first.');
+                return;
+            }
+
+            const canvas = document.getElementById('qrCanvas');
+            QRCode.toCanvas(canvas, url, {
+                width: 300,
+                margin: 0,
+                color: {
+                    dark: '#1a1a18',
+                    light: '#ffffff'
+                },
+                errorCorrectionLevel: 'M'
+            }, function (error) {
+                if (error) {
+                    console.error(error);
+                    alert('Error generating QR code. Please check the URL.');
+                }
+            });
+        }
+
+        // Auto-generate if URL comes from hash
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                document.getElementById('urlInput').value = decodeURIComponent(hash);
+                generateQR();
+            }
+        });
+    </script>
+
+</body>
+</html>
